@@ -1,0 +1,112 @@
+{
+    "name": "MyDB",
+    "tables": [
+        {
+            "name": "users",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "IntegerType",
+                    "nullable": false,
+                    "primary_key": true,
+                    "foreign_key": null
+                },
+                {
+                    "name": "name",
+                    "type": "StringType",
+                    "nullable": false,
+                    "primary_key": false,
+                    "foreign_key": null
+                },
+                {
+                    "name": "age",
+                    "type": "IntegerType",
+                    "nullable": true,
+                    "primary_key": false,
+                    "foreign_key": null
+                }
+            ],
+            "rows": [
+                {
+                    "id": 2,
+                    "data": {
+                        "id": 2,
+                        "name": "Bob",
+                        "age": 45
+                    }
+                },
+                {
+                    "id": 3,
+                    "data": {
+                        "id": 3,
+                        "name": "Charlie",
+                        "age": 22
+                    }
+                }
+            ]
+        },
+        {
+            "name": "orders",
+            "columns": [
+                {
+                    "name": "id",
+                    "type": "IntegerType",
+                    "nullable": false,
+                    "primary_key": true,
+                    "foreign_key": null
+                },
+                {
+                    "name": "user_id",
+                    "type": "IntegerType",
+                    "nullable": false,
+                    "primary_key": false,
+                    "foreign_key": [
+                        "users",
+                        "id"
+                    ]
+                },
+                {
+                    "name": "product",
+                    "type": "StringType",
+                    "nullable": false,
+                    "primary_key": false,
+                    "foreign_key": null
+                }
+            ],
+            "rows": [
+                {
+                    "id": 1,
+                    "data": {
+                        "id": 1,
+                        "user_id": 1,
+                        "product": "Laptop"
+                    }
+                },
+                {
+                    "id": 2,
+                    "data": {
+                        "id": 2,
+                        "user_id": 2,
+                        "product": "Phone"
+                    }
+                },
+                {
+                    "id": 3,
+                    "data": {
+                        "id": 3,
+                        "user_id": 3,
+                        "product": "Mouse"
+                    }
+                },
+                {
+                    "id": 4,
+                    "data": {
+                        "id": 4,
+                        "user_id": 2,
+                        "product": "Computer"
+                    }
+                }
+            ]
+        }
+    ]
+}
