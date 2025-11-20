@@ -1,0 +1,39 @@
+<!-- app/frontend/templates/index.html -->
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8"/>
+  <title>Smart Day Planner</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <div class="container">
+    <h1>Smart Day Planner</h1>
+
+    <section class="card">
+      <h2>Current Weather</h2>
+      {% if weather %}
+        <p class="weather">{{ weather.condition }} — {{ weather.temperature }}°C</p>
+      {% else %}
+        <p>No weather data</p>
+      {% endif %}
+      <form action="/api/plan/refresh" method="post">
+        <button type="submit">Refresh Plan</button>
+      </form>
+    </section>
+
+    <section class="card">
+      <h2>Today's Activities</h2>
+      {% if activities and activities|length > 0 %}
+        <ul>
+          {% for a in activities %}
+            <li>{{ a.name }} — {{ a.type }} (priority: {{ a.priority }})</li>
+          {% endfor %}
+        </ul>
+      {% else %}
+        <p>No activities yet</p>
+      {% endif %}
+    </section>
+  </div>
+</body>
+</html>

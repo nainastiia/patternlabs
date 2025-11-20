@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  # 1. Додаток FastAPI
+  app:
+    build: .
+    # Мапінг портів: 8080 на вашому комп'ютері -> 8000 у контейнері.
+    ports:
+      - "8080:8000"
+    volumes:
+      - ./app:/app/app
+
+    # ПРЯМА ПЕРЕДАЧА ЗМІННИХ СЕРЕДОВИЩА:
+    environment:
+      # ВАШ КОРЕКТНИЙ КЛЮЧ API:
+      OPENWEATHER_API_KEY: 6d6a3c22ba9618b5b4f23d5a822ddf69
+      WEATHER_CITY: Kyiv
+      MONGO_URI: mongodb://mongo:27017/plannerDB
+
+    depends_on:
+      - mongo
+    restart: always
+
+    # Команда для запуску
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000 --reload
+
+  # 2. База Даних MongoDB
+  mongo:
+    image: mongo:latest
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+
+  # 3. Адмін-інтерфейс MongoDB
+  mongo-express:
+    image: mongo-express:latest
+    ports:
+      - "8081:8081"
+    environment:
+      ME_CONFIG_MONGODB_SERVER: mongo
+      ME_CONFIG_MONGODB_PORT: 27017
+      ME_CONFIG_MONGODB_ENABLE_ADMIN: 'false'
+      ME_CONFIG_BASICAUTH_USERNAME: user
+      ME_CONFIG_BASICAUTH_PASSWORD: password
+    depends_on:
+      - mongo
+
+volumes:
+  mongo_data:

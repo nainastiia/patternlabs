@@ -1,0 +1,10 @@
+fastapi
+uvicorn[standard]
+pydantic
+motor
+requests
+httpx
+Jinja2
+dotenv
+python-dotenv
+apscheduler
