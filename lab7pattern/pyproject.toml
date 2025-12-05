@@ -1,0 +1,20 @@
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "drone-patterns-lab"
+version = "1.0.0"
+description = "Drone mission framework using GoF Design Patterns"
+authors = [
+    {name = "Student", email = "student@example.com"}
+]
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "pytest"
+]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+pythonpath = ["."]
